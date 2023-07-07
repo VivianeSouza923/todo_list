@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:todo_list/Widgets/todo_list_item.dart';
+import 'package:todo_list/models/todo.dart';
 
 // eu ainda não tenho nenhum estado, nada, então estou começando com Stateless, não Statefull
 class TodoListPage extends StatefulWidget {
@@ -14,12 +15,10 @@ class _TodoListPageState extends State<TodoListPage> {
   final TextEditingController todoController = TextEditingController();
 
   // cada string é um título de uma tarefa
-  List<String> tarefas = [];
+  List<Todo> tarefas = [];
 
   @override
   Widget build(BuildContext context) {
-    
-
     // base de todas ou praticamente todas as telas
     return SafeArea(
       child: Scaffold(
@@ -60,7 +59,11 @@ class _TodoListPageState extends State<TodoListPage> {
                       onPressed: () {
                         String text = todoController.text;
                         setState(() {
-                          tarefas.add(text);
+                          Todo newTodo = Todo(
+                            title: text,
+                            dateTime: DateTime.now(),
+                          );
+                          tarefas.add(newTodo);
                         });
                         //limpar o campo após adicionar a tarefa
                         todoController.clear();
@@ -75,17 +78,16 @@ class _TodoListPageState extends State<TodoListPage> {
                     ),
                   ],
                 ),
-    
+
                 // espaçamento entre as duas linhas (texto + botão)
                 const SizedBox(
                   height: 16,
                 ),
-    
-    
+
                 // permite que a lista tenha a maior altura que ela pode ocupar, ocupa o máximo de espaço que cabe e permite o scroll
                 Flexible(
                   // list view ( onde as tarefas irão ficar e podem roladas). É interessante que ela fique dentro de uma sizedBox
-    
+
                   child: ListView(
                     // vai deixar a nossa lista o mais enxuta possível
                     shrinkWrap: true,
@@ -110,9 +112,9 @@ class _TodoListPageState extends State<TodoListPage> {
                          color: Colors.red[100],
                         height: 50,
                       ),*/
-                
-                      for (String tarefa in tarefas)
-                
+
+                      for (Todo todo in tarefas)
+
                         //É UM ITEM DA SUA LISTA
                         /*ListTile(
                           title: Text(tarefa),
@@ -123,23 +125,23 @@ class _TodoListPageState extends State<TodoListPage> {
                             print("Tarefa: $tarefa");
                           },
                         ),*/
-    
+
                         TodoListItem(
-                          title: tarefa,
-                          
+                          todo: todo,
                           
                         ),
+                        
                     ],
                   ),
                 ),
-    
+
                 const SizedBox(
                   height: 16,
                 ),
-    
+
                 Row(
                   children: [
-                     Expanded(
+                    Expanded(
                       child: Text(
                         "Você possui ${tarefas.length} tarefas pendentes",
                       ),
