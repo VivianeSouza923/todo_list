@@ -22,7 +22,7 @@ class _TodoListPageState extends State<TodoListPage> {
     // base de todas ou praticamente todas as telas
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.green[100],
+        backgroundColor: Colors.green[50],
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
