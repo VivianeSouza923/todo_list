@@ -22,7 +22,7 @@ class _TodoListPageState extends State<TodoListPage> {
     // base de todas ou praticamente todas as telas
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.green[50],
+        backgroundColor: Color.fromARGB(255, 235, 180, 41),
         body: Center(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
@@ -142,8 +142,10 @@ class _TodoListPageState extends State<TodoListPage> {
                 Row(
                   children: [
                     Expanded(
+                      
                       child: Text(
                         "Você possui ${tarefas.length} tarefas pendentes",
+                        style: const TextStyle(fontWeight: FontWeight.bold ),
                       ),
                     ),
                     ElevatedButton(
