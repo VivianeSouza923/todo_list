@@ -4,7 +4,7 @@ import 'package:todo_list/models/todo.dart';
 
 // eu ainda não tenho nenhum estado, nada, então estou começando com Stateless, não Statefull
 class TodoListPage extends StatefulWidget {
-  TodoListPage({super.key});
+  const TodoListPage({super.key});
 
   @override
   State<TodoListPage> createState() => _TodoListPageState();
@@ -22,8 +22,18 @@ class _TodoListPageState extends State<TodoListPage> {
     // base de todas ou praticamente todas as telas
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 235, 180, 41),
-        body: Center(
+        backgroundColor: Colors.greenAccent,
+        body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/images/fundo1.jpg'),
+            fit: BoxFit.cover,
+            //colorFilter: ColorFilter.linearToSrgbGamma(),
+          ),
+        ),
+        
+        
+        child: Center(
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
@@ -164,6 +174,7 @@ class _TodoListPageState extends State<TodoListPage> {
           ),
         ),
       ),
+    ),
     );
   }
 }

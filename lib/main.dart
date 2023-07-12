@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // o MaterialApp é o widget principal do nosso app, traz navegação, temas, localização, traduções etc. Ele faz muitas coisas importantes.
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       // o home especifica a tela inicial do nosso app
       // ele espera também um widget, pois telas também são widgets
