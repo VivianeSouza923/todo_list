@@ -16,6 +16,7 @@ class _TodoListPageState extends State<TodoListPage> {
 
   // cada string é um título de uma tarefa
   List<Todo> tarefas = [];
+  Todo? deleteTodo;
 
   @override
   Widget build(BuildContext context) {
@@ -178,5 +179,18 @@ class _TodoListPageState extends State<TodoListPage> {
     setState(() {
       tarefas.remove(todo);
     });
+
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(
+          'Tarefa ${todo.title} foi deletada com sucesso!',
+          style: const TextStyle(
+            color: Colors.white,
+          ),
+        ),
+        action: SnackBarAction(
+            label: 'Desfazer', textColor: Colors.orange, onPressed: () {}),
+      ),
+    );
   }
 }
