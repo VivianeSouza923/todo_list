@@ -4,10 +4,11 @@ import 'package:intl/intl.dart';
 import 'package:todo_list/models/todo.dart';
 
 class TodoListItem extends StatelessWidget {
-  const TodoListItem({super.key, required this.todo, required this.onDelete});
+  const TodoListItem({super.key, required this.todo, required this.onDelete,});
 
   final Todo todo;
   final Function(Todo) onDelete;
+ 
 
   @override
   Widget build(BuildContext context) {
@@ -34,23 +35,17 @@ class TodoListItem extends StatelessWidget {
 
           // botão de editar tarefa:
 
-          IconSlideAction(
-            color: Colors.yellow,
-            icon: Icons.edit_note,
-            caption: "Editar",
-            //função anônima para o onTap
-            onTap: () {},
-          ),
+         
         ],
         //botões que aparecem no lado esquerdo, caso você deslize para a direita
         //     -------->          actions: [],                   <------------
         child: Container(
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            color: Colors.blueAccent,
+            color: Colors.green,
           ),
 
-          //height: 60, --> não preciso mais porque é interessante que se autoajuste para evitar overflow.
+          //height: 60, --> não preciso mais porque é   interessante que se autoajuste para evitar overflow.
           //margin: const EdgeInsets.symmetric(vertical: 2), // é para espaçamento fora do container
           padding: const EdgeInsets.all(
               16), // é para espaçamento dentro do container

@@ -17,6 +17,7 @@ class _TodoListPageState extends State<TodoListPage> {
   // cada string é um título de uma tarefa
   List<Todo> tarefas = [];
   Todo? deleteTodo;
+  int? deletedTodoPos;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +28,7 @@ class _TodoListPageState extends State<TodoListPage> {
         body: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
-              image: AssetImage('assets/images/fundo2.jpg'),
+              image: AssetImage('assets/images/fundo5.jpeg'),
               fit: BoxFit.cover,
               //colorFilter: ColorFilter.linearToSrgbGamma(),
             ),
@@ -51,7 +52,7 @@ class _TodoListPageState extends State<TodoListPage> {
                           decoration: const InputDecoration(
                             border: OutlineInputBorder(
                               borderSide: BorderSide(
-                                color: Color(0xFFB44A60),
+                                color: Colors.black,
                               ),
                             ),
                             labelText: "O que tens a fazer?",
@@ -176,6 +177,9 @@ class _TodoListPageState extends State<TodoListPage> {
   }
 
   void onDelete(Todo todo) {
+    deleteTodo = todo;
+    deletedTodoPos = tarefas.indexOf(todo);
+
     setState(() {
       tarefas.remove(todo);
     });
@@ -189,7 +193,15 @@ class _TodoListPageState extends State<TodoListPage> {
           ),
         ),
         action: SnackBarAction(
-            label: 'Desfazer', textColor: Colors.orange, onPressed: () {}),
+          label: 'Desfazer',
+          textColor: Colors.orange,
+          onPressed: () {
+            setState(() {
+              tarefas.insert(deletedTodoPos!, deleteTodo!);
+            });
+          },
+        ),
+        duration: const Duration(seconds: 6),
       ),
     );
   }
