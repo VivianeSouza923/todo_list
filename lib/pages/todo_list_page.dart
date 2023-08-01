@@ -24,7 +24,7 @@ class _TodoListPageState extends State<TodoListPage> {
     // base de todas ou praticamente todas as telas
     return SafeArea(
       child: Scaffold(
-        backgroundColor: Colors.greenAccent,
+        
         body: Container(
           decoration: const BoxDecoration(
             image: DecorationImage(
@@ -88,16 +88,16 @@ class _TodoListPageState extends State<TodoListPage> {
                       ),
                     ],
                   ),
-
+      
                   // espaçamento entre as duas linhas (texto + botão)
                   const SizedBox(
                     height: 16,
                   ),
-
+      
                   // permite que a lista tenha a maior altura que ela pode ocupar, ocupa o máximo de espaço que cabe e permite o scroll
                   Flexible(
                     // list view ( onde as tarefas irão ficar e podem roladas). É interessante que ela fique dentro de uma sizedBox
-
+      
                     child: ListView(
                       // vai deixar a nossa lista o mais enxuta possível
                       shrinkWrap: true,
@@ -122,9 +122,9 @@ class _TodoListPageState extends State<TodoListPage> {
                          color: Colors.red[100],
                         height: 50,
                       ),*/
-
+      
                         for (Todo todo in tarefas)
-
+      
                           //É UM ITEM DA SUA LISTA
                           /*ListTile(
                           title: Text(tarefa),
@@ -135,7 +135,7 @@ class _TodoListPageState extends State<TodoListPage> {
                             print("Tarefa: $tarefa");
                           },
                         ),*/
-
+      
                           TodoListItem(
                             todo: todo,
                             onDelete: onDelete,
@@ -143,11 +143,11 @@ class _TodoListPageState extends State<TodoListPage> {
                       ],
                     ),
                   ),
-
+      
                   const SizedBox(
                     height: 16,
                   ),
-
+      
                   Row(
                     children: [
                       Expanded(
@@ -157,7 +157,7 @@ class _TodoListPageState extends State<TodoListPage> {
                         ),
                       ),
                       ElevatedButton(
-                        onPressed: () {},
+                        onPressed: showDeleteTodosConfirmationDialog,
                         style: ElevatedButton.styleFrom(
                             backgroundColor: Colors.orange,
                             padding: const EdgeInsets.all(14)),
@@ -184,6 +184,7 @@ class _TodoListPageState extends State<TodoListPage> {
       tarefas.remove(todo);
     });
 
+    ScaffoldMessenger.of(context).clearSnackBars();
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(
@@ -204,5 +205,39 @@ class _TodoListPageState extends State<TodoListPage> {
         duration: const Duration(seconds: 6),
       ),
     );
+  }
+
+  void showDeleteTodosConfirmationDialog () {
+    showDialog(context: context, builder: (context) =>  AlertDialog(
+      title: const Text('Deletar TODAS as tarefas?'),
+      content: const Text('Você tem certeza que quer prosseguir? Depois não tem como voltar atrás, hein!'),
+
+      actions: [
+        TextButton(
+          style: TextButton.styleFrom(foregroundColor: Colors.orange),
+          onPressed: () {
+            //só fecha a caixa de mensagem
+            Navigator.of(context).pop();
+          },
+          child: const Text('Cancelar'),
+          ),
+
+        TextButton(
+          style: TextButton.styleFrom(foregroundColor: Colors.red),
+          onPressed: () {
+            Navigator.of(context).pop();
+            deleteAllTarefas();
+          },
+          child: const Text('Deletar tudo'),
+          ),
+      ],
+    ),
+    );
+  }
+
+  void deleteAllTarefas () {
+    setState(() {
+      tarefas.clear();
+    });
   }
 }
